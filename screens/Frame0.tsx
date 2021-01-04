@@ -1,12 +1,11 @@
-import { View, Text, Button } from "react-native";
+import {View, Text, Button, SafeAreaView} from "react-native";
 import * as React from 'react';
-import Frame1 from "./Frame1";
 
 export default function Frame0({navigation}: {navigation: any}) {
     return (
-      <View>
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text>Frame 0</Text>
-          <Button title='next' onPress={() => navigation.navigate('Frame1')}/>
-      </View>
+          <Button title='Sign Up' onPress={() => navigation.navigate('Frame1')}/>
+      </SafeAreaView>
     );
 }
