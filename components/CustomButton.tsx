@@ -1,10 +1,11 @@
 import {Text, View} from "./Themed";
-import {  Button, TouchableOpacity } from "react-native";
+import {  Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { StyleSheet } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 
-export default function CustomButton({ action, type, title, height, width, colors }: { action: any, type: string, title: string, height: number, width: number, colors: [] }) {
+
+export default function CustomButton({ action, type, title, height, width, colors, icon }: { action: any, type: string, title: string, height: number, width: number, colors: [], icon: string }) {
     return (
         <View>
             <TouchableOpacity
@@ -12,6 +13,14 @@ export default function CustomButton({ action, type, title, height, width, color
                 onPress={action}
             >
                 <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']} style={styles.gradient}>
+                    {{
+                        if(typeof icon !== "undefined") {
+                            <Image
+                                style={{height: '100%', width: styles.plain.width / title.length}}
+                                source={require('../assets/images/' + icon)}
+                            />
+                        }
+                    }}
                     <Text style={{fontSize: 45, color:'white', marginBottom: '4%', display: 'flex'}} >{title}</Text>
                 </LinearGradient>
             </TouchableOpacity>
@@ -30,7 +39,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 'auto',
         marginBottom: 'auto',
-        padding: 10
+        padding: 10,
+        borderColor: 'white'
     },
     outlined: {
         display: 'flex',
