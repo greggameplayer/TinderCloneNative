@@ -6,7 +6,7 @@ export default function Frame2({navigation}: {navigation: any}) {
     return (
         <View>
             <Text>Frame 2</Text>
-            <CustomButton action={() => {alert('coucou')}} type={'plain'} title={'test'} />
+            <CustomButton action={() => {alert('coucou')}} title={'test'} icon={{name: 'facebook', color: '#FD3178'}} type={"outlined"} />
             <Button title='next' onPress={() => navigation.navigate('Frame3')}/>
         </View>
     );
