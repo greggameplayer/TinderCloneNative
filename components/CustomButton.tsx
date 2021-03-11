@@ -6,25 +6,25 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
 
-export default function CustomButton({ action, type, title, height, width, colors, icon }: { action: any, type: string, title: string, height?: number, width?: number, colors?: [], icon?: { name: string, color: string } }) {
+export default function CustomButton({ action, type, title, height, width, colors, icon, disabled }: { action: any, type: string, title: string, height?: number | string, width?: number | string, colors?: Array<string> | [] | undefined, icon?: { name: string, color: string }, disabled?: boolean}) {
     return (
         <View>
             <TouchableOpacity
                 style={(type === 'outlined') ? {...styles().outlined, height: height || 100, width: width || 250} : {...styles().plain, width: width || 250, height: height || 100}}
                 onPress={action}
+                disabled={disabled}
             >
-                <Btn type={type} colors={colors} icon={icon} title={title}/>
+                <Btn type={type} colors={(disabled) ? ['#b3b3b3', '#989696'] : colors} icon={icon} title={title} disabled={disabled}/>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Icon(props: {name?: string; color?: string} ) {
+export function Icon({props, disabled}: {props: {name: string, color: string} | undefined, disabled: boolean | undefined} ) {
     if (props) {
         return (
             <View style={{backgroundColor: 'none'}}>
-                {/* @ts-ignore */}
-                <FontAwesome5 size={35} {...props}/>
+                <FontAwesome5 size={35} name={props.name} color={(disabled) ? '#b3b3b3' : props.color}/>
             </View>
             );
     } else {
@@ -34,14 +34,14 @@ function Icon(props: {name?: string; color?: string} ) {
     }
 }
 
-function Btn({type, colors, icon, title} : {type: string, colors: [] | undefined, icon: {name: string, color: string} | undefined, title: string}) {
+export function Btn({type, colors, icon, title, disabled} : {type: string, colors: Array<string> | [] | undefined, icon: {name: string, color: string} | undefined, title: string, disabled: boolean | undefined}) {
     if (type == 'outlined') {
         return (
             <View>
                 <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']} style={styles(icon, type).gradient}>
                     <View style={styles(icon, type).innerGradient}>
-                        <Icon {...icon}/>
-                        <Text style={textStyle(icon).gradient} >{title}</Text>
+                        <Icon props={icon} disabled={disabled}/>
+                        <Text style={textStyle(icon, disabled).gradient} >{title}</Text>
                     </View>
                 </LinearGradient>
             </View>
@@ -50,7 +50,7 @@ function Btn({type, colors, icon, title} : {type: string, colors: [] | undefined
         return (
           <View>
               <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']} style={styles(icon, type).gradient}>
-                  <Icon {...icon}/>
+                  <Icon props={icon} disabled={disabled}/>
                   <Text style={textStyle(icon).default} >{title}</Text>
               </LinearGradient>
           </View>
@@ -102,18 +102,18 @@ const styles = (icon?: {name?: string, color?: string} | undefined, type?: strin
     }
 });
 
-const textStyle = (icon: {name?: string, color?: string} | undefined) => StyleSheet.create({
+const textStyle = (icon: {name?: string, color?: string} | undefined, disabled?: boolean | undefined) => StyleSheet.create({
     default: {
         fontSize: 45,
         color:'white',
-        marginBottom: '4%',
+        marginBottom: 10,
         display: 'flex',
         marginRight: (typeof icon == "undefined") ? 0 : '10%'
     },
     gradient: {
         fontSize: 45,
-        color:'#FD3178',
-        marginBottom: '4%',
+        color:(disabled) ? '#b3b3b3' : '#FD3178',
+        marginBottom: 10,
         display: 'flex',
         marginRight: (typeof icon == "undefined") ? 0 : '10%'
     }
