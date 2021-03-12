@@ -12,13 +12,17 @@ import {
 
 const CELL_COUNT = 6;
 
-export function CustomCodeInput ({dataArg}: {dataArg: React.SetStateAction<string>}) {
+export function CustomCodeInput({dataArg, setDataArg}: { dataArg: React.SetStateAction<string>, setDataArg: React.SetStateAction<any> }) {
     const [value, setValue] = useState('');
 
     useEffect(() => {
         // @ts-ignore
         setValue(dataArg)
     }, [dataArg])
+
+    useEffect(() => {
+        setDataArg(value)
+    }, [value, setDataArg])
     const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
         value,
@@ -26,8 +30,7 @@ export function CustomCodeInput ({dataArg}: {dataArg: React.SetStateAction<strin
     });
 
     return (
-        <SafeAreaView style={styles.root}>
-            <Text style={styles.title}>Underline example</Text>
+        <View>
             <CodeField
                 ref={ref}
                 {...props}
@@ -44,12 +47,12 @@ export function CustomCodeInput ({dataArg}: {dataArg: React.SetStateAction<strin
                         key={index}
                         style={[styles.cellRoot, isFocused && styles.focusCell]}>
                         <Text style={styles.cellText}>
-                            {symbol || (isFocused ? <Cursor /> : null)}
+                            {symbol || (isFocused ? <Cursor/> : null)}
                         </Text>
                     </View>
                 )}
             />
-        </SafeAreaView>
+        </View>
     );
 }
 
@@ -58,22 +61,24 @@ const styles = StyleSheet.create({
     title: {textAlign: 'center', fontSize: 30},
     codeFieldRoot: {
         marginTop: 20,
-        width: 280,
+        width: '100%',
+        display: "flex",
+        justifyContent: "space-around",
         marginLeft: 'auto',
-        marginRight: 'auto',
+        marginRight: 'auto'
     },
     cellRoot: {
-        width: 60,
-        height: 60,
+        width: 40,
+        height: 40,
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
+        borderBottomWidth: 1
     },
     cellText: {
         color: '#000',
-        fontSize: 36,
-        textAlign: 'center',
+        fontSize: 25,
+        textAlign: 'center'
     },
     focusCell: {
         borderBottomColor: '#007AFF',
