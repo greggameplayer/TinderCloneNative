@@ -9,8 +9,8 @@ import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/na
 import {createStackNavigator} from "@react-navigation/stack";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import {SignUpScreens} from './types';
-import Frame0 from "./screens/Frame0";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import FrameTest from "./screens/FrameTest";
 
 const Stack = createStackNavigator();
 
@@ -44,7 +44,7 @@ export default function App() {
                         }).map(([name, component]) => (
                             <Stack.Screen name={name} component={component} key={name}/>
                         ))}
-                        <Stack.Screen name="WelcomeScreen" component={Frame0} options={{
+                        <Stack.Screen name="WelcomeScreen" component={FrameTest} options={{
                             headerShown: false,
                             headerBackImage: () => (
                                 <FontAwesome5 name={'facebook'}/>

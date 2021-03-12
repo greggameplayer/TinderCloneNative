@@ -1,4 +1,5 @@
-import { View, Text, Button } from "react-native";
+import { View, Button } from "react-native";
+import {Text} from "../components/Themed";
 import * as React from 'react';
 import Frame2 from "./Frame2";
 

@@ -7,6 +7,7 @@ import Frame6 from "./screens/Frame6";
 import Frame7 from "./screens/Frame7";
 import Frame8 from "./screens/Frame8";
 import Frame9 from "./screens/Frame9";
+import Frame0 from "./screens/Frame0";
 
 export type RootStackParamList = {
   Root: undefined;
@@ -19,6 +20,7 @@ export type TopTabParamList = {
 };
 
 export const SignUpScreens = {
+  Frame0: Frame0,
   Frame1: Frame1,
   Frame2: Frame2,
   Frame3: Frame3,
