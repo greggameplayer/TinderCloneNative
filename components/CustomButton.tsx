@@ -96,6 +96,8 @@ const styles = (icon?: {name?: string, color?: string} | undefined, type?: strin
         display: 'flex',
         flex: 1,
         borderRadius: 1000,
+        paddingTop: 15,
+        paddingBottom: 15,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: (typeof icon == "undefined") ? 'center' : 'space-around',
@@ -104,17 +106,19 @@ const styles = (icon?: {name?: string, color?: string} | undefined, type?: strin
 
 const textStyle = (icon: {name?: string, color?: string} | undefined, disabled?: boolean | undefined) => StyleSheet.create({
     default: {
-        fontSize: 45,
+        fontSize: 20,
         color:'white',
         marginBottom: 10,
         display: 'flex',
-        marginRight: (typeof icon == "undefined") ? 0 : '10%'
+        marginRight: (typeof icon == "undefined") ? 'auto' : '10%',
+        marginLeft: (typeof icon == "undefined") ? 'auto' : 0,
     },
     gradient: {
-        fontSize: 45,
+        fontSize: 20,
         color:(disabled) ? '#b3b3b3' : '#FD3178',
         marginBottom: 10,
         display: 'flex',
-        marginRight: (typeof icon == "undefined") ? 0 : '10%'
+        marginRight: (typeof icon == "undefined") ? 'auto' : '10%',
+        marginLeft: (typeof icon == "undefined") ? 'auto' : 0,
     }
 })
