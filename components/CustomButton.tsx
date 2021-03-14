@@ -189,9 +189,10 @@ const textStyle = ({
                        textColor
                    }: { leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string }, disabled?: boolean | undefined, textColor?: string | undefined }) => StyleSheet.create({
     default: {
-        fontSize: 20,
+        fontSize: 22,
         color: (textColor) ? textColor : 'white',
-        marginBottom: 1,
+        fontFamily: 'Chalet',
+        marginBottom: 1.25,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -202,9 +203,10 @@ const textStyle = ({
         paddingRight: '3%'
     },
     gradient: {
-        fontSize: 20,
+        fontSize: 22,
         color: (disabled) ? '#b3b3b3' : (textColor) ? textColor : '#FD3178',
-        marginBottom: 1,
+        fontFamily: 'Chalet',
+        marginBottom: 1.25,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
