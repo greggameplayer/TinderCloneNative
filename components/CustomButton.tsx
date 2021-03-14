@@ -1,65 +1,126 @@
 import {Text, View} from "./Themed";
-import { TouchableOpacity } from "react-native";
-import React from "react";
-import { StyleSheet } from "react-native";
+import {TouchableOpacity} from "react-native";
+import React, {useEffect, useState} from "react";
+import {StyleSheet} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
-import { FontAwesome5 } from '@expo/vector-icons';
+import {FontAwesome5} from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
 
 
-export default function CustomButton({ action, type, title, height, width, colors, icon, disabled }: { action: any, type: string, title: string, height?: number | string, width?: number | string, colors?: Array<string> | [] | undefined, icon?: { name: string, color: string }, disabled?: boolean}) {
+export default function CustomButton({
+                                         action,
+                                         type,
+                                         title,
+                                         height,
+                                         width,
+                                         colors,
+                                         leftIcon,
+                                         rightIcon,
+                                         disabled,
+                                         forFlatList,
+                                         textColor,
+                                         clickedColor,
+                                         unclickedColor
+                                     }: { action: any, type: string, title: string, height?: number | string, width?: number | string, colors?: Array<string> | [] | undefined, leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string }, disabled?: boolean, forFlatList?: boolean, textColor?: string, clickedColor?: any, unclickedColor?: any }) {
+    const [clicked, setClicked] = useState(false);
+    const [flatListColors, setFlatListColors] = useState([unclickedColor, unclickedColor]);
+    useEffect(() => {
+        // @ts-ignore
+        setFlatListColors([clickedColor, clickedColor])
+        setFlatListColors([unclickedColor, unclickedColor])
+    }, [clickedColor, unclickedColor])
+
     return (
         <View>
             <TouchableOpacity
-                style={(type === 'outlined') ? {...styles().outlined, height: height || 100, width: width || 250} : {...styles().plain, width: width || 250, height: height || 100}}
-                onPress={action}
-                disabled={disabled}
+                style={(type === 'outlined') ? {
+                    ...styles().outlined,
+                    height: height || 100,
+                    width: width || 250
+                } : {...styles().plain, width: width || 250, height: height || 100}}
+                onPress={() => {
+                    if (forFlatList) {
+                        setClicked(!clicked);
+                        if (clicked) {
+                            setFlatListColors([clickedColor, clickedColor])
+                        } else {
+                            setFlatListColors([unclickedColor, unclickedColor])
+                        }
+                    }
+                    action();
+                }}
+                disabled={(forFlatList) ? false : disabled}
             >
-                <Btn type={type} colors={(disabled) ? ['#b3b3b3', '#989696'] : colors} icon={icon} title={title} disabled={disabled}/>
+                <Btn type={type}
+                     colors={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? ['#b3b3b3', '#989696'] : colors : flatListColors}
+                     leftIcon={leftIcon} rightIcon={rightIcon} title={title} disabled={disabled}
+                     forFlatList={forFlatList} textColor={textColor}/>
             </TouchableOpacity>
         </View>
     );
 }
 
-export function Icon({props, disabled}: {props: {name: string, color: string} | undefined, disabled: boolean | undefined} ) {
+export function Icon({
+                         props,
+                         disabled,
+                         forFlatList
+                     }: { props: { name: string, color: string } | undefined, disabled: boolean | undefined, forFlatList: boolean | undefined }) {
     if (props) {
         return (
             <View style={{backgroundColor: 'none'}}>
-                <FontAwesome5 size={35} name={props.name} color={(disabled) ? '#b3b3b3' : props.color}/>
+                <FontAwesome5 size={35} name={props.name}
+                              color={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? '#b3b3b3' : props.color : props.color}/>
             </View>
-            );
+        );
     } else {
         return (
-          <View/>
+            <View/>
         );
     }
 }
 
-export function Btn({type, colors, icon, title, disabled} : {type: string, colors: Array<string> | [] | undefined, icon: {name: string, color: string} | undefined, title: string, disabled: boolean | undefined}) {
+export function Btn({
+                        type,
+                        colors,
+                        leftIcon,
+                        rightIcon,
+                        title,
+                        disabled,
+                        forFlatList,
+                        textColor
+                    }: { type: string, colors: Array<string> | [] | undefined, leftIcon: { name: string, color: string } | undefined, title: string, disabled: boolean | undefined, rightIcon: { name: string, color: string } | undefined, forFlatList: boolean | undefined, textColor: string | undefined }) {
     if (type == 'outlined') {
         return (
             <View>
-                <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']} style={styles(icon, type).gradient}>
-                    <View style={styles(icon, type).innerGradient}>
-                        <Icon props={icon} disabled={disabled}/>
-                        <Text style={textStyle(icon, disabled).gradient} >{title}</Text>
+                <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']}
+                                style={styles(leftIcon, type).gradient}>
+                    <View style={styles(leftIcon, type).innerGradient}>
+                        <Icon props={leftIcon} disabled={disabled} forFlatList={forFlatList}/>
+                        <Text style={textStyle({leftIcon, rightIcon, disabled, textColor}).gradient}>{title}</Text>
+                        <Icon props={rightIcon} disabled={disabled} forFlatList={forFlatList}/>
                     </View>
                 </LinearGradient>
             </View>
         );
     } else {
         return (
-          <View>
-              <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']} style={styles(icon, type).gradient}>
-                  <Icon props={icon} disabled={disabled}/>
-                  <Text style={textStyle(icon).default} >{title}</Text>
-              </LinearGradient>
-          </View>
+            <View>
+                <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']}
+                                style={styles(leftIcon, type).gradient}>
+                    <Icon props={leftIcon} disabled={disabled} forFlatList={forFlatList}/>
+                    <Text style={textStyle({
+                        leftIcon: leftIcon,
+                        rightIcon: rightIcon,
+                        textColor: textColor
+                    }).default}>{title}</Text>
+                    <Icon props={rightIcon} disabled={disabled} forFlatList={forFlatList}/>
+                </LinearGradient>
+            </View>
         );
     }
 }
 
-const styles = (icon?: {name?: string, color?: string} | undefined, type?: string) => StyleSheet.create({
+const styles = (icon?: { name?: string, color?: string } | undefined, type?: string) => StyleSheet.create({
     plain: {
         display: 'flex',
         fontWeight: 'bold',
@@ -106,21 +167,36 @@ const styles = (icon?: {name?: string, color?: string} | undefined, type?: strin
     }
 });
 
-const textStyle = (icon: {name?: string, color?: string} | undefined, disabled?: boolean | undefined) => StyleSheet.create({
+const textStyle = ({
+                       leftIcon,
+                       rightIcon,
+                       disabled,
+                       textColor
+                   }: { leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string }, disabled?: boolean | undefined, textColor?: string | undefined }) => StyleSheet.create({
     default: {
         fontSize: 20,
-        color:'white',
-        marginBottom: 10,
+        color: (textColor) ? textColor : 'white',
+        marginBottom: 1,
         display: 'flex',
-        marginRight: (typeof icon == "undefined") ? 'auto' : '10%',
-        marginLeft: (typeof icon == "undefined") ? 'auto' : 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        marginRight: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : '10%' : 0,
+        marginLeft: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : 0 : 0,
+        paddingLeft: '3%',
+        paddingRight: '3%'
     },
     gradient: {
         fontSize: 20,
-        color:(disabled) ? '#b3b3b3' : '#FD3178',
-        marginBottom: 10,
+        color: (disabled) ? '#b3b3b3' : '#FD3178',
+        marginBottom: 1,
         display: 'flex',
-        marginRight: (typeof icon == "undefined") ? 'auto' : '10%',
-        marginLeft: (typeof icon == "undefined") ? 'auto' : 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        marginRight: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : '10%' : 0,
+        marginLeft: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : 0 : 0,
+        paddingLeft: '3%',
+        paddingRight: '3%'
     }
 })
