@@ -20,15 +20,17 @@ export default function CustomButton({
                                          forFlatList,
                                          textColor,
                                          clickedColor,
-                                         unclickedColor
-                                     }: { action: any, type: string, title: string, height?: number | string, width?: number | string, colors?: Array<string> | [] | undefined, leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string }, disabled?: boolean, forFlatList?: boolean, textColor?: string, clickedColor?: any, unclickedColor?: any }) {
+                                         unclickedColor,
+                                         counter,
+                                         setCounter,
+                                         counterDisplay
+                                     }: {
+    action: any, type: string, title: string, height?: number | string, width?: number | string,
+    colors?: Array<string> | [] | undefined, leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string },
+    disabled?: boolean, forFlatList?: boolean, textColor?: string, clickedColor?: any, unclickedColor?: any, counter?: any, setCounter?: any, counterDisplay?: boolean | undefined
+}) {
     const [clicked, setClicked] = useState(false);
     const [flatListColors, setFlatListColors] = useState([unclickedColor, unclickedColor]);
-    useEffect(() => {
-        // @ts-ignore
-        setFlatListColors([clickedColor, clickedColor])
-        setFlatListColors([unclickedColor, unclickedColor])
-    }, [clickedColor, unclickedColor])
 
     return (
         <View>
@@ -38,23 +40,36 @@ export default function CustomButton({
                     height: height || 100,
                     width: width || 250
                 } : {...styles().plain, width: width || 250, height: height || 100}}
-                onPress={() => {
+                onPressIn={() => {
                     if (forFlatList) {
-                        setClicked(!clicked);
                         if (clicked) {
-                            setFlatListColors([clickedColor, clickedColor])
+                            setClicked(false);
+                            setCounter(counter - 1);
                         } else {
-                            setFlatListColors([unclickedColor, unclickedColor])
+                            setClicked(true);
+                            setCounter(counter + 1);
                         }
                     }
                     action();
+                }}
+                onPressOut={() => {
+                    if (forFlatList) {
+                        if (clicked) {
+                            setFlatListColors([clickedColor, clickedColor]);
+                        } else {
+                            setFlatListColors([unclickedColor, unclickedColor]);
+                        }
+                    }
                 }}
                 disabled={(forFlatList) ? false : disabled}
             >
                 <Btn type={type}
                      colors={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? ['#b3b3b3', '#989696'] : colors : flatListColors}
-                     leftIcon={leftIcon} rightIcon={rightIcon} title={title} disabled={disabled}
-                     forFlatList={forFlatList} textColor={textColor}/>
+                     leftIcon={leftIcon} rightIcon={rightIcon}
+                     title={(counterDisplay) ? title + ' (' + counter + '/5)' : title}
+                     disabled={disabled}
+                     forFlatList={forFlatList}
+                     textColor={(typeof forFlatList == "undefined" || !forFlatList) ? textColor : flatListColors[0]}/>
             </TouchableOpacity>
         </View>
     );
@@ -188,7 +203,7 @@ const textStyle = ({
     },
     gradient: {
         fontSize: 20,
-        color: (disabled) ? '#b3b3b3' : '#FD3178',
+        color: (disabled) ? '#b3b3b3' : (textColor) ? textColor : '#FD3178',
         marginBottom: 1,
         display: 'flex',
         justifyContent: 'center',
