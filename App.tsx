@@ -11,6 +11,9 @@ import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import {SignUpScreens} from './types';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FrameTest from "./screens/FrameTest";
+import {useFonts} from "expo-font";
+import {ApplicationProvider} from "@ui-kitten/components";
+import * as eva from '@eva-design/eva';
 
 const Stack = createStackNavigator();
 
@@ -27,13 +30,17 @@ export function Home() {
 }
 
 export default function App() {
+    let [fontsLoaded] = useFonts({
+        'TinderFont': require('./assets/fonts/GothamRounded-Medium.otf'),
+    });
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
 
-    if (!isLoadingComplete) {
+    if (!isLoadingComplete && !fontsLoaded) {
         return null;
     } else {
         return (
+            <ApplicationProvider {...eva} theme={colorScheme === 'dark' ? eva.dark : eva.light}>
             <SafeAreaProvider>
                 <NavigationContainer linking={LinkingConfiguration}
                                      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -55,6 +62,7 @@ export default function App() {
                 </NavigationContainer>
                 <StatusBar/>
             </SafeAreaProvider>
+            </ApplicationProvider>
         );
     }
 }

@@ -1,6 +1,6 @@
 import {Text, View} from "./Themed";
 import {TouchableOpacity} from "react-native";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {StyleSheet} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import {FontAwesome5} from '@expo/vector-icons';
@@ -31,15 +31,14 @@ export default function CustomButton({
 }) {
     const [clicked, setClicked] = useState(false);
     const [flatListColors, setFlatListColors] = useState([unclickedColor, unclickedColor]);
-
     return (
         <View>
             <TouchableOpacity
                 style={(type === 'outlined') ? {
-                    ...styles().outlined,
-                    height: height || 100,
-                    width: width || 250
-                } : {...styles().plain, width: width || 250, height: height || 100}}
+                    ...styles({height: height}).outlined,
+                    height: height || 50,
+                    width: width || 200
+                } : {...styles({height: height}).plain, width: width || 200, height: height || 50}}
                 onPressIn={() => {
                     if (forFlatList) {
                         if (clicked) {
@@ -68,6 +67,7 @@ export default function CustomButton({
                      leftIcon={leftIcon} rightIcon={rightIcon}
                      title={(counterDisplay) ? title + ' (' + counter + '/5)' : title}
                      disabled={disabled}
+                     height={height}
                      forFlatList={forFlatList}
                      textColor={(typeof forFlatList == "undefined" || !forFlatList) ? textColor : flatListColors[0]}/>
             </TouchableOpacity>
@@ -83,7 +83,7 @@ export function Icon({
     if (props) {
         return (
             <View style={{backgroundColor: 'none'}}>
-                <FontAwesome5 size={35} name={props.name}
+                <FontAwesome5 size={20} name={props.name}
                               color={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? '#b3b3b3' : props.color : props.color}/>
             </View>
         );
@@ -102,26 +102,39 @@ export function Btn({
                         title,
                         disabled,
                         forFlatList,
-                        textColor
-                    }: { type: string, colors: Array<string> | [] | undefined, leftIcon: { name: string, color: string } | undefined, title: string, disabled: boolean | undefined, rightIcon: { name: string, color: string } | undefined, forFlatList: boolean | undefined, textColor: string | undefined }) {
+                        textColor,
+                        height
+                    }: { type: string, colors: Array<string> | [] | undefined, leftIcon: { name: string, color: string } | undefined, title: string, disabled: boolean | undefined, rightIcon: { name: string, color: string } | undefined, forFlatList: boolean | undefined, textColor: string | undefined, height: any }) {
     if (type == 'outlined') {
         return (
             <View>
-                <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']}
-                                style={styles(leftIcon, type).gradient}>
-                    <View style={styles(leftIcon, type).innerGradient}>
+                <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059']}
+                                start={[0, 1]}
+                                end={[1, 0]}
+                                locations={[0.15, 0.75]}
+                                style={{...styles({icon: leftIcon, type, height}).gradient, padding: 2}}>
+                    <View style={{...styles({icon: leftIcon, type, height}).innerGradient}}>
                         <Icon props={leftIcon} disabled={disabled} forFlatList={forFlatList}/>
-                        <Text style={textStyle({leftIcon, rightIcon, disabled, textColor}).gradient}>{title}</Text>
+                        <Text style={{...textStyle({leftIcon, rightIcon, disabled, textColor}).gradient}}>{title}</Text>
                         <Icon props={rightIcon} disabled={disabled} forFlatList={forFlatList}/>
                     </View>
                 </LinearGradient>
             </View>
         );
+    } else if (type == 'text') {
+        return (
+            <View style={{...styles({icon: leftIcon, type, height}).innerGradient}}>
+                <Text style={{...textStyle({disabled: disabled, textColor: textColor}).default}}>{title}</Text>
+            </View>
+        );
     } else {
         return (
             <View>
-                <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059', '#FF7059']}
-                                style={styles(leftIcon, type).gradient}>
+                <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059']}
+                                start={[0, 1]}
+                                end={[1, 0]}
+                                locations={[0.15, 0.75]}
+                                style={{...styles({icon: leftIcon, type, height}).gradient, paddingHorizontal: 25}}>
                     <Icon props={leftIcon} disabled={disabled} forFlatList={forFlatList}/>
                     <Text style={textStyle({
                         leftIcon: leftIcon,
@@ -135,23 +148,28 @@ export function Btn({
     }
 }
 
-const styles = (icon?: { name?: string, color?: string } | undefined, type?: string) => StyleSheet.create({
+const styles = ({
+                    icon,
+                    type,
+                    height
+                }: { icon?: { name: string, color: string }, type?: string, height: any }) => StyleSheet.create({
     plain: {
         display: 'flex',
         fontWeight: 'bold',
         borderRadius: 1000,
         alignItems: "center",
         justifyContent: "center",
+        flexWrap: "nowrap",
         marginTop: 'auto',
         marginBottom: 'auto',
         padding: 10,
-        borderColor: 'white'
     },
     outlined: {
         display: 'flex',
         fontWeight: 'bold',
         borderRadius: 1000,
         alignItems: "center",
+        flexWrap: "nowrap",
         justifyContent: "center",
         marginTop: 'auto',
         marginBottom: 'auto',
@@ -163,9 +181,10 @@ const styles = (icon?: { name?: string, color?: string } | undefined, type?: str
         height: '100%',
         flex: 1,
         borderRadius: 1000,
-        padding: 5,
+        padding: 3,
         alignItems: 'center',
         flexDirection: 'row',
+        flexWrap: "nowrap",
         justifyContent: (typeof icon == "undefined") ? 'center' : 'space-around'
     },
     innerGradient: {
@@ -173,12 +192,12 @@ const styles = (icon?: { name?: string, color?: string } | undefined, type?: str
         backgroundColor: (useColorScheme() == "dark") ? 'black' : 'white',
         display: 'flex',
         flex: 1,
+        height: '100%',
         borderRadius: 1000,
-        paddingTop: 15,
-        paddingBottom: 15,
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: (typeof icon == "undefined") ? 'center' : 'space-around',
+        flexWrap: "nowrap",
+        justifyContent: (typeof icon == "undefined") ? 'center' : 'space-around'
     }
 });
 
@@ -189,30 +208,28 @@ const textStyle = ({
                        textColor
                    }: { leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string }, disabled?: boolean | undefined, textColor?: string | undefined }) => StyleSheet.create({
     default: {
-        fontSize: 22,
+        fontSize: 16,
         color: (textColor) ? textColor : 'white',
-        fontFamily: 'Chalet',
+        fontFamily: 'TinderFont',
         marginBottom: 1.25,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        marginRight: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : '10%' : 0,
+        marginRight: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : '10%' : '10%',
         marginLeft: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : 0 : 0,
         paddingLeft: '3%',
         paddingRight: '3%'
     },
     gradient: {
-        fontSize: 22,
+        fontSize: 16,
         color: (disabled) ? '#b3b3b3' : (textColor) ? textColor : '#FD3178',
-        fontFamily: 'Chalet',
+        fontFamily: 'TinderFont',
         marginBottom: 1.25,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        marginRight: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : '10%' : 0,
-        marginLeft: (typeof rightIcon == "undefined") ? (typeof leftIcon == "undefined") ? 'auto' : 0 : 0,
         paddingLeft: '3%',
         paddingRight: '3%'
     }

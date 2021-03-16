@@ -6,7 +6,7 @@ import {CustomCodeInput} from "../components/CustomCodeInput";
 import {useState} from "react";
 import useColorScheme from '../hooks/useColorScheme';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-//import InputDate from "../components/InputDate";
+import InputDate from "../components/InputDate";
 
 
 export default function FrameTest({navigation}: { navigation: any }) {
@@ -41,25 +41,36 @@ export default function FrameTest({navigation}: { navigation: any }) {
                               leftIcon={{name: 'facebook', color: '#FD3178'}} type={"outlined"} disabled={true}
                               width={'55%'}/>
                 <CustomButton action={() => {
-                }} title={'second test'} width={'55%'} rightIcon={{name: 'facebook', color: 'white'}} type={"outlined"}
+                    alert('coucou')
+                }} title={'test'}  type={"text"}  width={'55%'} textColor={'grey'}/>
+                <CustomButton action={() => {
+                }} title={'second test'} width={'55%'} rightIcon={{name: 'facebook', color: 'red'}} type={"outlined"}
                               textColor={'blue'} forFlatList={true} clickedColor={'blue'} unclickedColor={'red'}
                               counter={counter} setCounter={setCounter}/>
                 <CustomButton action={() => {
-                }} title={'three test'} width={'55%'} rightIcon={{name: 'facebook', color: 'white'}} type={"outlined"}
+                }} title={'three test'} width={'55%'} rightIcon={{name: 'facebook', color: 'red'}} type={"outlined"}
+                              textColor={'blue'} forFlatList clickedColor={'blue'} unclickedColor={'red'}
+                              counter={counter} setCounter={setCounter} height={120}/>
+                <CustomButton action={() => {
+                }} title={'four test'} width={'55%'} rightIcon={{name: 'facebook', color: 'red'}} type={"outlined"}
                               textColor={'blue'} forFlatList clickedColor={'blue'} unclickedColor={'red'}
                               counter={counter} setCounter={setCounter}/>
                 <CustomButton action={() => {
-                }} title={'four test'} width={'55%'} rightIcon={{name: 'facebook', color: 'white'}} type={"outlined"}
+                }} title={'five test'} rightIcon={{name: 'facebook', color: 'red'}} type={"outlined"}
                               textColor={'blue'} forFlatList clickedColor={'blue'} unclickedColor={'red'}
                               counter={counter} setCounter={setCounter}/>
                 <CustomButton action={() => {
-                }} title={'five test'} width={'55%'} rightIcon={{name: 'facebook', color: 'white'}} type={"outlined"}
-                              textColor={'blue'} forFlatList clickedColor={'blue'} unclickedColor={'red'}
-                              counter={counter} setCounter={setCounter}/>
+                }} title={'six test'} rightIcon={{name: 'facebook', color: 'white'}} type={"plain"}
+                              textColor={'blue'}/>
                 <CustomCodeInput dataArg={dt} setDataArg={setDt}/>
                 <CustomButton action={() => {
                     console.log(counter)
                 }} type={"plain"} title={"validate"} width={'55%'} counterDisplay counter={counter}/>
+
+                <InputDate value={date} setValue={setDate} />
+                <CustomButton action={() => {
+                    console.log(date)
+                }} type={"plain"} title={"get Date"} width={'55%'}/>
                 <Text>Frame Test</Text>
                 <Button title='accès frame 0' onPress={() => navigation.navigate('Frame0')}/>
             </ScrollView>
