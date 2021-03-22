@@ -32,7 +32,6 @@ export default function CustomButton({
     const [clicked, setClicked] = useState(false);
     const [flatListColors, setFlatListColors] = useState([unclickedColor, unclickedColor]);
     return (
-        <View>
             <TouchableOpacity
                 style={(type === 'outlined') ? {
                     ...styles({height: height}).outlined,
@@ -71,7 +70,6 @@ export default function CustomButton({
                      forFlatList={forFlatList}
                      textColor={(typeof forFlatList == "undefined" || !forFlatList) ? textColor : flatListColors[0]}/>
             </TouchableOpacity>
-        </View>
     );
 }
 
