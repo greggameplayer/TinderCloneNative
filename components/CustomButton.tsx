@@ -32,44 +32,44 @@ export default function CustomButton({
     const [clicked, setClicked] = useState(false);
     const [flatListColors, setFlatListColors] = useState([unclickedColor, unclickedColor]);
     return (
-            <TouchableOpacity
-                style={(type === 'outlined') ? {
-                    ...styles({height: height}).outlined,
-                    height: height || 50,
-                    width: width || 200
-                } : {...styles({height: height}).plain, width: width || 200, height: height || 50}}
-                onPressIn={() => {
-                    if (forFlatList) {
-                        if (clicked) {
-                            setClicked(false);
-                            setCounter(counter - 1);
-                        } else {
-                            setClicked(true);
-                            setCounter(counter + 1);
-                        }
+        <TouchableOpacity
+            style={(type === 'outlined') ? {
+                ...styles({height: height}).outlined,
+                height: height || 50,
+                width: width || 200
+            } : {...styles({height: height}).plain, width: width || 200, height: height || 50}}
+            onPressIn={() => {
+                if (forFlatList) {
+                    if (clicked) {
+                        setClicked(false);
+                        setCounter(counter - 1);
+                    } else {
+                        setClicked(true);
+                        setCounter(counter + 1);
                     }
-                    action();
-                }}
-                onPressOut={() => {
-                    if (forFlatList) {
-                        if (clicked) {
-                            setFlatListColors([clickedColor, clickedColor]);
-                        } else {
-                            setFlatListColors([unclickedColor, unclickedColor]);
-                        }
+                }
+                action();
+            }}
+            onPressOut={() => {
+                if (forFlatList) {
+                    if (clicked) {
+                        setFlatListColors([clickedColor, clickedColor]);
+                    } else {
+                        setFlatListColors([unclickedColor, unclickedColor]);
                     }
-                }}
-                disabled={(forFlatList) ? false : disabled}
-            >
-                <Btn type={type}
-                     colors={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? ['#b3b3b3', '#989696'] : colors : flatListColors}
-                     leftIcon={leftIcon} rightIcon={rightIcon}
-                     title={(counterDisplay) ? title + ' (' + counter + '/5)' : title}
-                     disabled={disabled}
-                     height={height}
-                     forFlatList={forFlatList}
-                     textColor={(typeof forFlatList == "undefined" || !forFlatList) ? textColor : flatListColors[0]}/>
-            </TouchableOpacity>
+                }
+            }}
+            disabled={(forFlatList) ? false : disabled}
+        >
+            <Btn type={type}
+                 colors={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? ['#b3b3b3', '#989696'] : colors : flatListColors}
+                 leftIcon={leftIcon} rightIcon={rightIcon}
+                 title={(counterDisplay) ? title + ' (' + counter + '/5)' : title}
+                 disabled={disabled}
+                 height={height}
+                 forFlatList={forFlatList}
+                 textColor={(typeof forFlatList == "undefined" || !forFlatList) ? textColor : flatListColors[0]}/>
+        </TouchableOpacity>
     );
 }
 
@@ -158,8 +158,6 @@ const styles = ({
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "nowrap",
-        marginTop: 'auto',
-        marginBottom: 'auto',
         padding: 10,
     },
     outlined: {
@@ -169,8 +167,6 @@ const styles = ({
         alignItems: "center",
         flexWrap: "nowrap",
         justifyContent: "center",
-        marginTop: 'auto',
-        marginBottom: 'auto',
         padding: 10,
     },
     gradient: {
