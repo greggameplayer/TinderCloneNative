@@ -30,7 +30,6 @@ export function CustomCodeInput({dataArg, setDataArg}: { dataArg: React.SetState
     });
 
     return (
-        <View>
             <CodeField
                 ref={ref}
                 {...props}
@@ -52,7 +51,6 @@ export function CustomCodeInput({dataArg, setDataArg}: { dataArg: React.SetState
                     </View>
                 )}
             />
-        </View>
     );
 }
 

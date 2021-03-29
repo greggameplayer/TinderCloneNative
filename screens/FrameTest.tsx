@@ -32,7 +32,7 @@ export default function FrameTest({navigation}: { navigation: any }) {
                 paddingBottom: insets.bottom,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: (useColorScheme() == "dark") ? 'black' : 'white'
+                backgroundColor: 'black'
             }}>
                 <CustomButton action={() => {
                     alert('coucou')

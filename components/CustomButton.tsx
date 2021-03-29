@@ -80,7 +80,7 @@ export function Icon({
                      }: { props: { name: string, color: string } | undefined, disabled: boolean | undefined, forFlatList: boolean | undefined }) {
     if (props) {
         return (
-            <View style={{backgroundColor: 'none'}}>
+            <View style={{backgroundColor: 'none', overflow: "hidden", padding: 0}}>
                 <FontAwesome5 size={20} name={props.name}
                               color={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? '#b3b3b3' : props.color : props.color}/>
             </View>
@@ -127,7 +127,6 @@ export function Btn({
         );
     } else {
         return (
-            <View>
                 <LinearGradient colors={(colors) ? colors : ['#FD3178', '#FF7059']}
                                 start={[0, 1]}
                                 end={[1, 0]}
@@ -141,7 +140,6 @@ export function Btn({
                     }).default}>{title}</Text>
                     <Icon props={rightIcon} disabled={disabled} forFlatList={forFlatList}/>
                 </LinearGradient>
-            </View>
         );
     }
 }
@@ -158,7 +156,7 @@ const styles = ({
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "nowrap",
-        padding: 10,
+        overflow: 'hidden'
     },
     outlined: {
         display: 'flex',
@@ -167,7 +165,7 @@ const styles = ({
         alignItems: "center",
         flexWrap: "nowrap",
         justifyContent: "center",
-        padding: 10,
+        overflow: 'hidden'
     },
     gradient: {
         display: 'flex',

@@ -8,7 +8,6 @@ import {FontAwesome5} from "@expo/vector-icons";
 
 export default function CardInfo({action, text}: { action: any, text: string }) {
     return (
-        <View style={{marginRight: 0.5, marginLeft: -18}}>
             <LinearGradient colors={['#FF7059', '#FD3178']}
                             start={[0, 1]}
                             end={[1, 0]}
@@ -21,7 +20,6 @@ export default function CardInfo({action, text}: { action: any, text: string }) 
                     <FontAwesome5 name={"plus"} size={24} color={"#FD3178"}/>
                 </TouchableOpacity>
             </LinearGradient>
-        </View>
     );
 
 };
@@ -32,8 +30,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        width: '99%',
+        width: '92%',
         borderRadius: 5,
+        marginRight: 12
     },
     Text: {
         color: '#FFFFFF',
