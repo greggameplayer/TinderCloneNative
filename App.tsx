@@ -41,7 +41,7 @@ export default function App() {
                             // Use the screens normally
                             ...SignUpScreens,
                         }).map(([name, component]) => (
-                            <Stack.Screen name={name} component={component} key={name}/>
+                            <Stack.Screen name={name} component={component} key={name} options={{headerShown: false}}/>
                         ))}
                         <Stack.Screen name="WelcomeScreen" component={Frame0} options={{headerShown: false}}/>
                         <Stack.Screen name="HomeScreen" component={Home} options={{headerShown: false}}/>
