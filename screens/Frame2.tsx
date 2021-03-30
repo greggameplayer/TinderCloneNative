@@ -15,6 +15,7 @@ export default function Frame2({navigation}: {navigation: any}) {
             flexWrap: "wrap",paddingTop: insets.top}}>
 
             <View style={styles.containerArrow}>
+                {/* @ts-ignore */}
                 <Icon name={'arrow-left'} onPress={() => navigation.navigate('Frame0')}  type={"font-awesome-5"} color={"#c3c3c3"}/>
             </View>
             <View style={styles.containerNum}>

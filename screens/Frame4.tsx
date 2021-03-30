@@ -14,7 +14,8 @@ export default function Frame4({navigation}: {navigation: any}) {
             flexWrap: "wrap", paddingTop: insets.top}}>
 
             <View style={styles.containerArrow}>
-                <Icon name={'arrow-left'} onPress={() => navigation.navigate('Frame0')} style={styles.arrowIcon} type={"font-awesome-5"} color={"#c3c3c3"}/>
+                {/* @ts-ignore */}
+                <Icon name={'arrow-left'} onPress={() => navigation.navigate('Frame0')} type={"font-awesome-5"} color={"#c3c3c3"}/>
             </View>
             <View style={styles.containerNum}>
                 <Text style={styles.texte}>Mon prénom est</Text>

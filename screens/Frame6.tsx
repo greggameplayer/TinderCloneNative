@@ -15,6 +15,7 @@ export default function Frame6({navigation}: {navigation: any}) {
             flexWrap: "wrap", paddingTop: insets.top}}>
 
             <View style={styles.containerArrow}>
+                {/* @ts-ignore */}
                 <Icon name={'arrow-left'} onPress={() => navigation.navigate('Frame0')} style={styles.arrowIcon} type={"font-awesome-5"} color={"#c3c3c3"}/>
             </View>
             <View style={styles.containerNum}>
@@ -23,13 +24,13 @@ export default function Frame6({navigation}: {navigation: any}) {
 
             <View style={styles.containerButton}>
                 <View style={styles.buttonCenter}>
-                    <CustomButton action={() => navigation.navigate('Frame10')}  type={"plain"} title={'CONTINUER'} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={250} title={'FEMME'}  />
+                    <CustomButton action={() => navigation.navigate('Frame10')}  type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={250} title={'FEMME'}  />
                 </View>
                 <View style={styles.buttonCenter}>
-                    <CustomButton action={() => navigation.navigate('Frame10')}  type={"plain"} title={'CONTINUER'} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={250} title={'HOMME'}  />
+                    <CustomButton action={() => navigation.navigate('Frame10')}  type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={250} title={'HOMME'}  />
                 </View>
                 <View style={styles.buttonCenter}>
-                    <CustomButton action={() => navigation.navigate('Frame10')}  type={"plain"} title={'CONTINUER'} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={'AUTRE'}  />
+                    <CustomButton action={() => navigation.navigate('Frame10')}  type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={'AUTRE'}  />
                 </View>
             </View>
             <View style={styles.buttonBottom}>
@@ -43,7 +44,7 @@ export default function Frame6({navigation}: {navigation: any}) {
                 </View>
 
                 <View style={styles.buttonBottom}>
-                    <CustomButton action={() => navigation.navigate('Frame7')}  colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={"CONTINUER"} />
+                    <CustomButton action={() => navigation.navigate('Frame7')}  colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={"CONTINUER"} type={"outlined"} />
                 </View>
 
             </View>

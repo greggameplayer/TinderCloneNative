@@ -12,7 +12,7 @@ import {
 
 const CELL_COUNT = 6;
 
-export function CustomButton({dataArg, setDataArg}: { dataArg: React.SetStateAction<string>, setDataArg: React.SetStateAction<any> }) {
+export function CustomCodeInput({dataArg, setDataArg}: { dataArg: React.SetStateAction<string>, setDataArg: React.SetStateAction<any> }) {
     const [value, setValue] = useState('');
 
     useEffect(() => {

@@ -10,6 +10,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import {SignUpScreens} from './types';
 import Frame0 from "./screens/Frame0";
+import {useFonts} from "expo-font";
 
 const Stack = createStackNavigator();
 
@@ -28,8 +29,11 @@ export function Home() {
 export default function App() {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
+    let [fontsLoaded] = useFonts({
+        'TinderFont': require('./assets/fonts/GothamRounded-Medium.otf'),
+    });
 
-    if (!isLoadingComplete) {
+    if (!isLoadingComplete && !fontsLoaded) {
         return null;
     } else {
         return (

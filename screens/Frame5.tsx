@@ -2,6 +2,7 @@ import {View, Text, Button, StyleSheet} from "react-native";
 import * as React from 'react';
 import {Icon, Input} from "react-native-elements";
 import CustomButton from "../components/CustomButton";
+// @ts-ignore
 import DatePicker from 'react-native-datepicker';
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 
@@ -15,7 +16,8 @@ export default function Frame5({navigation}: {navigation: any}) {
             flexWrap: "wrap",paddingTop: insets.top }}>
 
             <View style={styles.containerArrow}>
-                <Icon name={'arrow-left'} onPress={() => navigation.navigate('Frame0')} style={styles.arrowIcon} type={"font-awesome-5"} color={"#c3c3c3"}/>
+                {/* @ts-ignore */}
+                <Icon name={'arrow-left'} onPress={() => navigation.navigate('Frame0')} type={"font-awesome-5"} color={"#c3c3c3"}/>
             </View>
             <View style={styles.containerNum}>
                 <Text style={styles.texte}>Ma date d'anniversaire est</Text>

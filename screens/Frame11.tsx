@@ -22,10 +22,14 @@ export default function Frame11({navigation}: {navigation: any}) {
             flexWrap: "wrap", paddingTop: insets.top}}>
 
             <View style={styles.header}>
-                <Icon type="font-awesome-5" name="fire" color="#FD3178"></Icon>
-                <Icon type="font-awesome-5" name="star" solid></Icon>
-                <Icon type="font-awesome-5" name="comment" solid onPress={() => navigation.navigate('Frame20')}></Icon>
-                <Icon type="font-awesome-5" name="user" solid onPress={() => navigation.navigate('Frame12')}></Icon>
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="fire" color="#FD3178"/>
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="star" solid />
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="comment" solid onPress={() => navigation.navigate('Frame20')}/>
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="user" solid onPress={() => navigation.navigate('Frame12')}/>
             </View>
             <View style={styles.swiper}>
 
@@ -50,11 +54,16 @@ export default function Frame11({navigation}: {navigation: any}) {
 
 
             <View style={styles.footer}>
-                <Icon type="font-awesome-5" name="undo" raised size={19} color="yellow" ></Icon>
-                <Icon type="font-awesome-5" name="times" raised size={25} color="red"></Icon>
-                <Icon type="font-awesome-5" name="star" solid raised size={19} color="blue"></Icon>
-                <Icon type="font-awesome-5" name="heart" solid raised size={25} color="green"></Icon>
-                <Icon type="font-awesome-5" name="bolt" raised size={19} color="purple"></Icon>
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="undo" raised size={19} color="yellow" />
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="times" raised size={25} color="red"/>
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="star" solid raised size={19} color="blue"/>
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="heart" solid raised size={25} color="green"/>
+                {/* @ts-ignore */}
+                <Icon type="font-awesome-5" name="bolt" raised size={19} color="purple"/>
             </View>
         </View>
     );
@@ -90,7 +99,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderWidth: 2,
         borderColor: "#E8E8E8",
-        imageBackground: "yellow",
+        backgroundColor: "yellow",
 
 
     },
