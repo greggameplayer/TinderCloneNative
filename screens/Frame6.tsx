@@ -44,7 +44,7 @@ export default function Frame6({navigation}: {navigation: any}) {
                 </View>
 
                 <View style={styles.buttonBottom}>
-                    <CustomButton action={() => navigation.navigate('Frame7')}  colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={"CONTINUER"} type={"outlined"} />
+                    <CustomButton action={() => navigation.navigate('Frame7')}  colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={"CONTINUER"} type={"plain"} />
                 </View>
 
             </View>

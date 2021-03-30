@@ -4,12 +4,14 @@ import { Input } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 import CustomButton from "../components/CustomButton";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useState} from "react";
 
 
 
 export default function Frame9({navigation}: {navigation: any}) {
     //todo ajouter le FlatList
     const insets = useSafeAreaInsets();
+    const [counter, setCounter] = useState(0);
     const listPassion = [
         {
             id : 1,
@@ -80,14 +82,26 @@ export default function Frame9({navigation}: {navigation: any}) {
             <View style={styles.flatList}>
                 <FlatList
                     data={listPassion}
-                    renderItem={({item }) => (<CustomButton action={() => navigation.navigate('Frame10')}  type={"outlined"} title={item.passion}   />) }
+                    renderItem={(item) => renderItems(item, counter, setCounter)}
                     keyExtractor={(item) => item.passion}
+                    style={{width: "75%", height: "80%"}}
                 />
             </View>
-            <View style={styles.buttonBottom}>
-                <CustomButton action={() => navigation.navigate('Frame10')}  type={"plain"} height={40} width={220} title={'CONTINUER'}   />
+            <View style={{display: "flex", alignItems: "center", justifyContent: "center", alignSelf: "center"}}>
+                <CustomButton action={() => {
+                }} title={'CONTINUER'} width={'55%'} type={"outlined"}
+                              counter={counter} setCounter={setCounter} counterDisplay/>
             </View>
         </View>
+    );
+}
+
+export const renderItems = (item: any, counter: any, setCounter: any) => {
+    return (
+        <CustomButton action={() => {
+        }} title={item.passion} type={"outlined"}
+                      textColor={'blue'} forFlatList={true} clickedColor={'pink'} unclickedColor={'red'}
+                      counter={counter} setCounter={setCounter} colors={["#FD3178", "#FD3178"]}/>
     );
 }
 

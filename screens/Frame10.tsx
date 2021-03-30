@@ -21,18 +21,6 @@ export default function Frame10({navigation}: {navigation: any})  {
                 <Text style={styles.texte}>Ajouter des photos</Text>
             </View>
             <Text style={styles.textegris}>Ajouter au moins 2 photos pour continuer</Text>
-
-            <View>
-                <Button title={""} onPress={() => { ImagePicker.openPicker({
-                    width: 300,
-                    height: 400,
-                    cropping: true
-                }).then(image => {
-                    console.log(image);
-                });}
-                }
-                />
-            </View>
             <View style={styles.buttonBottom}>
                 <CustomButton action={() => navigation.navigate('Frame11')} type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={220} title={'CONTINUER'}   />
             </View>

@@ -19,7 +19,7 @@ export default function Frame4({navigation}: {navigation: any}) {
             <View style={styles.containerNum}>
                 <Text style={styles.texte}>Ma scolarité</Text>
             </View>
-            <Input placeholder={"Scolarité"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={"text"}/>
+            <Input placeholder={"Scolarité"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={"default"}/>
             <Text style={styles.textegris}>Voila comment ça apparaitra dans Tinder</Text>
 
             <View style={styles.buttonBottom}>
