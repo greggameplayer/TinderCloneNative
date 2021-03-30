@@ -3,10 +3,14 @@ import * as React from 'react';
 import {Icon} from "react-native-elements";
 import CustomButton from "../components/CustomButton";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useState} from "react";
 
 export default function Frame7({navigation}: {navigation: any}) {
 
     const insets = useSafeAreaInsets();
+    const [femme, setFemme] = useState(true);
+    const [homme, setHomme] = useState(true);
+    const [two, setTwo] = useState(true);
 
     return (
         <View style={{ flex:1 , backgroundColor:"#FFFFFF",flexDirection: "column",
@@ -23,17 +27,33 @@ export default function Frame7({navigation}: {navigation: any}) {
 
             <View style={styles.containerButton}>
                 <View style={styles.buttonCenter}>
-                    <CustomButton action={() => navigation.navigate('Frame8')}  type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={250} title={'FEMME'}  />
+                    <CustomButton action={() => {
+                        setFemme(!femme);
+                        setHomme(true);
+                        setTwo(true);
+                    }}  type={"plain"} colors={(femme) ? ["#F5F5F5", "#F5F5F5"] : undefined}
+                                  textColor={(femme) ? "#969494" : undefined} height={40} width={250} title={'FEMME'}  />
                 </View>
                 <View style={styles.buttonCenter}>
-                    <CustomButton action={() => navigation.navigate('Frame8')}  type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={250} title={'HOMME'}  />
+                    <CustomButton action={() => {
+                        setHomme(!homme);
+                        setFemme(true);
+                        setTwo(true);
+                    }}  type={"plain"} colors={(homme) ? ["#F5F5F5", "#F5F5F5"] : undefined}
+                                  textColor={(homme) ? "#969494" : undefined} height={40} width={250} title={'HOMME'}  />
                 </View>
                 <View style={styles.buttonCenter}>
-                    <CustomButton action={() => navigation.navigate('Frame8')}  type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={'LES 2'}  />
+                    <CustomButton action={() => {
+                        setTwo(!two);
+                        setHomme(true);
+                        setFemme(true);
+                    }}  type={"plain"} colors={(two) ? ["#F5F5F5", "#F5F5F5"] : undefined}
+                                  textColor={(two) ? "#969494" : undefined}  height={40} width={250} title={'LES 2'}  />
                 </View>
             </View>
             <View style={styles.buttonBottom}>
-                <CustomButton action={() => navigation.navigate('Frame8')} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"}  height={40} width={250} title={'CONTINUER'}   type={"plain"}/>
+                <CustomButton action={() => navigation.navigate('Frame8')} disabledColor={["#F5F5F5", "#F5F5F5"]}
+                              textDisabledColor={"#969494"}  height={40} width={250} title={'CONTINUER'} type={"plain"} disabled={homme && femme && two}/>
 
             </View>
         </View>

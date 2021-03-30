@@ -5,11 +5,13 @@ import { Icon } from 'react-native-elements'
 import CustomButton from "../components/CustomButton";
 import {CustomCodeInput} from "../TinderCloneNative/components/CustomCodeInput";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useState} from "react";
 
 
 export default function Frame2({navigation}: {navigation: any}) {
 
     const insets = useSafeAreaInsets();
+    const [code, setCode] = useState("");
     return (
         <View style={{ flex:1 , backgroundColor:"#FFFFFF",flexDirection: "column",
             flexWrap: "wrap",paddingTop: insets.top}}>
@@ -24,10 +26,10 @@ export default function Frame2({navigation}: {navigation: any}) {
             <Text style={styles.textegris}>0768624866  RENVOYER</Text>
 
             <View style={styles.containerInput}>
-                <CustomCodeInput  dataArg={""} setDataArg={() =>{}}/>
+                <CustomCodeInput  dataArg={code} setDataArg={setCode}/>
             </View>
             <View style={styles.buttonBottom}>
-                <CustomButton action={() => navigation.navigate('Frame4')}  type={"plain"} title={'CONTINUER'} height={40} width={250}  />
+                <CustomButton action={() => navigation.navigate('Frame4')}  type={"plain"} title={'CONTINUER'} height={40} width={250} disabled={code.length < 6} disabledColor={["#F5F5F5", "#F5F5F5"]} textDisabledColor={"#969494"} />
             </View>
         </View>
     );
@@ -48,6 +50,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         textAlign: 'center',
         flexDirection: "row",
+        backgroundColor: "white",
         flex: 0.1
     },
     container: {

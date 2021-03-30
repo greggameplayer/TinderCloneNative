@@ -4,12 +4,14 @@ import { Input } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 import CustomButton from "../components/CustomButton";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useState} from "react";
 
 
 export default function FramePhone({navigation}: {navigation: any}) {
 
 
     const insets = useSafeAreaInsets();
+    const [phone, setPhone] = useState("");
 
     return (
         <View style={{ flex:1 , backgroundColor:"#FFFFFF",flexDirection: "column",
@@ -22,12 +24,14 @@ export default function FramePhone({navigation}: {navigation: any}) {
             <View style={styles.containerNum}>
                 <Text style={styles.texte}>Mon numéro</Text>
             </View>
-            <Input placeholder={"Numéro de téléphone est"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={'numeric'}/>
+            <Input placeholder={"Numéro de téléphone est"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={'numeric'} onChangeText={(text: any) => {
+                setPhone(text);
+            }}/>
             <Text style={styles.textegris}>Nous vous enverrons un message avec un code de vérification. Des frais liés à l'envoi de messages et/ou d'utilisation de données peuvent s'appliquer</Text>
             <Text style={styles.texte2}>Découvrez ce qui se passe si vous changez de numéro de téléphone.</Text>
 
             <View style={styles.buttonBottom}>
-                <CustomButton action={() => navigation.navigate('Frame2')}  type={"plain"} title={'CONTINUER'} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} />
+                <CustomButton action={() => navigation.navigate('Frame2')}  type={"plain"} title={'CONTINUER'} disabled={phone == ""} disabledColor={["#F5F5F5", "#F5F5F5"]} textDisabledColor={"#969494"}/>
             </View>
         </View>
     );

@@ -9,62 +9,171 @@ import {useState} from "react";
 
 
 export default function Frame9({navigation}: {navigation: any}) {
-    //todo ajouter le FlatList
     const insets = useSafeAreaInsets();
     const [counter, setCounter] = useState(0);
-    const listPassion = [
+
+       const listPassion = [
         {
-            id : 1,
-            passion: 'Bière',
-        },
+   id : 0,
+    passion: "Cinéma",
+            widthButton: 80
+    },
         {
-            id : 2,
-            passion: 'Foot',
-        },
+    id : 1,
+    passion: "Gastronomie",
+            widthButton: 130
+    },
         {
-            id : 3,
-            passion: 'FastFood',
-        },
+    id : 2,
+    passion: "Ecrivain(e)",
+            widthButton: 110
+    },
         {
-            id : 4,
-            passion: 'Burger',
-        },
+    id : 3,
+    passion: "Personne à chien",
+            widthButton: 180
+    },
         {
-            id : 5,
-            passion: 'Vegan',
-        },
+    id : 4,
+    passion: "Motos",
+            widthButton: 70
+    },
         {
-            id : 6,
-            passion: 'Vin',
-        },
+    id : 6,
+    passion: "Mode",
+            widthButton: 60
+    },
         {
-            id : 7,
-            passion: 'Chien',
-        },
+    id : 7,
+    passion: "Voyage",
+            widthButton: 80
+    },
         {
-            id : 8,
-            passion: 'Chat',
-        },
+    id : 8,
+    passion: "Skateboarder",
+            widthButton: 140
+    },
         {
-            id : 661,
-            passion: 'Chauve',
-        },
+    id : 9,
+    passion: "Art",
+            widthButton: 60
+    },
         {
-            id : 67,
-            passion: 'Rudy',
-        },
+    id : 10,
+    passion: "Comédie",
+            widthButton: 100
+    },
         {
-            id : 68,
-            passion: 'Fitness',
-        },
+    id : 12,
+    passion: "Extraverti(e)",
+            widthButton: 130
+    },
         {
-            id : 69,
-            passion: "Sport",
-        }
+    id : 13,
+    passion: "E-Sports",
+            widthButton: 90
+    },
+        {
+    id : 15,
+    passion: "Road trips",
+            widthButton: 120
+    },
+        {
+    id : 16,
+    passion: "Natation",
+            widthButton: 90
+    },
+        {
+    id : 18,
+    passion: "Yoga",
+            widthButton: 60
+    },
+        {
+    id : 19,
+    passion: "Tatouages",
+            widthButton: 110
+    },
+        {
+    id : 20,
+    passion: "Cuisine",
+            widthButton: 80
+    },
+        {
+    id : 22,
+    passion: "Randonnée",
+            widthButton: 120
+    },
+        {
+    id : 23,
+    passion: "Surf",
+            widthButton: 60
+    },
+        {
+    id : 24,
+    passion: "Sport",
+            widthButton: 70
+    },
+        {
+    id : 25,
+    passion: "Théâtre",
+            widthButton: 80
+    },
+        {
+    id : 26,
+    passion: "Pétanque",
+            widthButton: 100
+    },
+        {
+    id : 27,
+    passion: "Fripes",
+            widthButton: 70
+    },
+        {
+    id : 28,
+    passion: "Ski",
+            widthButton: 60
+    },
+        {
+    id : 29,
+    passion: "Vegan",
+            widthButton: 70
+    },
+        {
+    id : 30,
+    passion: "Tennis",
+            widthButton: 70
+    },
+        {
+    id : 31,
+    passion: "Café",
+            widthButton: 60
+    },
+        {
+    id : 32,
+    passion: "Disney",
+            widthButton: 70
+    },
+        {
+    id : 33,
+    passion: "Football",
+            widthButton: 90
+    },
+        {
+    id : 34,
+    passion: "Pâtisserie",
+            widthButton: 100
+    },
+        {
+    id : 35,
+    passion: "Bricolage",
+            widthButton: 100
+    },
+        {
+    id : 36,
+    passion: "Jardinnage",
+            widthButton: 120
+    }
     ];
-
-
-
 
 
     return (
@@ -82,30 +191,21 @@ export default function Frame9({navigation}: {navigation: any}) {
             <View style={styles.flatList}>
                 <FlatList
                     data={listPassion}
-                    renderItem={(item) => renderItems(item, counter, setCounter)}
+                    numColumns={3}
+                    renderItem={({item }) => (<CustomButton action={() =>{ }} style={{marginHorizontal: 5, marginVertical: 2.5}} title={item.passion} type={"outlined"} width={item.widthButton} height={30} forFlatList={true} clickedColor={'#FD3178'} unclickedColor={'#B3BEC4'} counter={counter} setCounter={setCounter}/>)}
                     keyExtractor={(item) => item.passion}
-                    style={{width: "75%", height: "80%"}}
                 />
             </View>
-            <View style={{display: "flex", alignItems: "center", justifyContent: "center", alignSelf: "center"}}>
-                <CustomButton action={() => {
+            <View style={{alignSelf: "center"}}>
+                <CustomButton action={() => { navigation.navigate("Frame10")
                 }} title={'CONTINUER'} width={'55%'} type={"outlined"}
-                              counter={counter} setCounter={setCounter} counterDisplay/>
+                              counter={counter} setCounter={setCounter} counterDisplay disabled={counter < 5}/>
             </View>
         </View>
     );
 }
 
-export const renderItems = (item: any, counter: any, setCounter: any) => {
-    return (
-        <CustomButton action={() => {
-        }} title={item.passion} type={"outlined"}
-                      textColor={'blue'} forFlatList={true} clickedColor={'pink'} unclickedColor={'red'}
-                      counter={counter} setCounter={setCounter} colors={["#FD3178", "#FD3178"]}/>
-    );
-}
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
 
     containerArrow:{
         paddingTop: 10,
@@ -136,7 +236,7 @@ const styles = StyleSheet.create({
         paddingLeft:35,
         color:"#c3c3c3",
         fontSize:12,
-        marginTop:22,
+        marginTop:62,
         width:"100%",
     },
     texte:{
@@ -148,7 +248,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         textAlign: "left",
         alignSelf:"center"
-
     },
     texte2:{
         marginRight:35,
@@ -157,15 +256,6 @@ const styles = StyleSheet.create({
         fontSize:12,
         textDecorationLine: 'underline',
         alignSelf:"center"
-
-
-    },
-    stretch: {
-        width: 200,
-        height: 48.5157954886425798425587,
-        resizeMode: 'stretch',
-        marginTop: 80,
-
     },
     gradient: {
         display: 'flex',
@@ -186,11 +276,8 @@ const styles = StyleSheet.create({
         alignSelf:"center",
     },
     flatList:{
-        flexDirection:"row",
-        width:"100%",
-        marginLeft:40,
-        marginRight:40,
-        alignSelf:"center",
-        flexWrap:"wrap"
+        marginTop: 20,
+        height: '65%',
+        alignSelf: "center"
     }
 });

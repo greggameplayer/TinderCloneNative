@@ -5,11 +5,13 @@ import CustomButton from "../components/CustomButton";
 // @ts-ignore
 import DatePicker from 'react-native-datepicker';
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useState} from "react";
 
 //todo faire une fonction
 
 export default function Frame5({navigation}: {navigation: any}) {
     const insets = useSafeAreaInsets();
+    const [date, setDate] = useState(new Date());
 
     return (
         <View style={{ flex:1 , backgroundColor:"#FFFFFF",flexDirection: "column",
@@ -26,15 +28,17 @@ export default function Frame5({navigation}: {navigation: any}) {
 
                 <DatePicker
                     style={{width: 400}}
-                    date={"28/03/2021"}
+                    date={date}
+                    onDateChange={setDate}
                     showIcon={false}
-                    mode="date"
-                    placeholder="select date"
-                    format="DD/MM/YYYY"
-                    minDate="01/01/1901"
-                    maxDate="30/03/2021"
-                    confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
+                    locale={"fr"}
+                    mode={"date"}
+                    placeholder={"select date"}
+                    format={"DD/MM/YYYY"}
+                    minDate={new Date("1901-01-01")}
+                    maxDate={new Date()}
+                    confirmBtnText={"Confirm"}
+                    cancelBtnText={"Cancel"}
                     customStyles={{
                         dateInput: {
                             marginRight:35,

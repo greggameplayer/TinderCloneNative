@@ -4,10 +4,12 @@ import { Input } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 import CustomButton from "../components/CustomButton";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useState} from "react";
 
 
 export default function Frame4({navigation}: {navigation: any}) {
     const insets = useSafeAreaInsets();
+    const [text, setText] = useState("");
     return (
         <View style={{ flex:1 , backgroundColor:"#FFFFFF",flexDirection: "column",
             flexWrap: "wrap", paddingTop: insets.top}}>
@@ -19,11 +21,11 @@ export default function Frame4({navigation}: {navigation: any}) {
             <View style={styles.containerNum}>
                 <Text style={styles.texte}>Ma scolarité</Text>
             </View>
-            <Input placeholder={"Scolarité"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={"default"}/>
+            <Input placeholder={"Scolarité"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={"default"} onChangeText={setText}/>
             <Text style={styles.textegris}>Voila comment ça apparaitra dans Tinder</Text>
 
             <View style={styles.buttonBottom}>
-                <CustomButton action={() => navigation.navigate('Frame9')}  type={"plain"} height={40} width={220} title={'CONTINUER'}   />
+                <CustomButton action={() => navigation.navigate('Frame9')}  type={"plain"} height={40} width={220} title={'CONTINUER'} disabled={text == ""} disabledColor={["#F5F5F5", "#F5F5F5"]} textDisabledColor={"#969494"}/>
             </View>
         </View>
     );

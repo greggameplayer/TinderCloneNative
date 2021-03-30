@@ -21,7 +21,7 @@ export default function FrameRegistration({navigation}: {navigation: any}) {
                 <Text style={styles.texte}>En vous connectant, vous acceptez nos <Text style={{ 'textDecorationLine': 'underline'}}>Conditions générales </Text>. Pour en savoir plus sur l’usage que nous faisons de vos données, consultez notre <Text style={{ 'textDecorationLine': 'underline'}}>Politique de confidentialité </Text> et notre <Text style={{ 'textDecorationLine': 'underline'}}>politique en matière de cookie</Text>.</Text>
             </View>
             <View style={styles.mt10}>
-                <CustomButton action={() => navigation.navigate('Frame1')} type={'outlined'} title={"CONNEXION AVEC APPLE"} width={300} height={48} />
+                <CustomButton action={() => navigation.navigate('Frame9')} type={'outlined'} title={"CONNEXION AVEC APPLE"} width={300} height={48} />
             </View>
             <View style={styles.mt10}>
                 <CustomButton action={() => navigation.navigate('Frame20')} type={'outlined'} title={"SE CONNECTER AVEC FACEBOOK"} width={300} height={48} />

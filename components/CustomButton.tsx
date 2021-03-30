@@ -17,17 +17,20 @@ export default function CustomButton({
                                          leftIcon,
                                          rightIcon,
                                          disabled,
+                                         disabledColor,
+                                         textDisabledColor,
                                          forFlatList,
                                          textColor,
                                          clickedColor,
                                          unclickedColor,
                                          counter,
                                          setCounter,
-                                         counterDisplay
+                                         counterDisplay,
+                                         style
                                      }: {
     action: any, type: string, title: string, height?: number | string, width?: number | string,
     colors?: Array<string> | [] | undefined, leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string },
-    disabled?: boolean, forFlatList?: boolean, textColor?: string, clickedColor?: any, unclickedColor?: any, counter?: any, setCounter?: any, counterDisplay?: boolean | undefined
+    disabled?: boolean, forFlatList?: boolean, textColor?: string, clickedColor?: any, unclickedColor?: any, counter?: any, setCounter?: any, counterDisplay?: boolean | undefined, style?: any, disabledColor?: any, textDisabledColor?: any
 }) {
     const [clicked, setClicked] = useState(false);
     const [flatListColors, setFlatListColors] = useState([unclickedColor, unclickedColor]);
@@ -36,8 +39,9 @@ export default function CustomButton({
             style={(type === 'outlined') ? {
                 ...styles({height: height}).outlined,
                 height: height || 50,
-                width: width || 200
-            } : {...styles({height: height}).plain, width: width || 200, height: height || 50}}
+                width: width || 200,
+                ...style
+            } : {...styles({height: height}).plain, width: width || 200, height: height || 50, ...style}}
             onPressIn={() => {
                 if (forFlatList) {
                     if (clicked) {
@@ -62,12 +66,13 @@ export default function CustomButton({
             disabled={(forFlatList) ? false : disabled}
         >
             <Btn type={type}
-                 colors={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? ['#b3b3b3', '#989696'] : colors : flatListColors}
+                 colors={(typeof forFlatList == "undefined" || !forFlatList) ? (disabled) ? (typeof disabledColor == "undefined") ? ['#b3b3b3', '#989696'] : disabledColor : colors : flatListColors}
                  leftIcon={leftIcon} rightIcon={rightIcon}
                  title={(counterDisplay) ? title + ' (' + counter + '/5)' : title}
                  disabled={disabled}
                  height={height}
                  forFlatList={forFlatList}
+                 textDisabledColor={textDisabledColor}
                  textColor={(typeof forFlatList == "undefined" || !forFlatList) ? textColor : flatListColors[0]}/>
         </TouchableOpacity>
     );
@@ -101,8 +106,9 @@ export function Btn({
                         disabled,
                         forFlatList,
                         textColor,
+                        textDisabledColor,
                         height
-                    }: { type: string, colors: Array<string> | [] | undefined, leftIcon: { name: string, color: string } | undefined, title: string, disabled: boolean | undefined, rightIcon: { name: string, color: string } | undefined, forFlatList: boolean | undefined, textColor: string | undefined, height: any }) {
+                    }: { type: string, colors: Array<string> | [] | undefined, leftIcon: { name: string, color: string } | undefined, title: string, disabled: boolean | undefined, rightIcon: { name: string, color: string } | undefined, forFlatList: boolean | undefined, textColor: string | undefined, height: any, textDisabledColor: string | undefined }) {
     if (type == 'outlined') {
         return (
             <View>
@@ -113,7 +119,7 @@ export function Btn({
                                 style={{...styles({icon: leftIcon, type, height}).gradient, padding: 2}}>
                     <View style={{...styles({icon: leftIcon, type, height}).innerGradient}}>
                         <Icon props={leftIcon} disabled={disabled} forFlatList={forFlatList}/>
-                        <Text style={{...textStyle({leftIcon, rightIcon, disabled, textColor}).gradient}}>{title}</Text>
+                        <Text style={{...textStyle({leftIcon, rightIcon, disabled, textDisabledColor, textColor}).gradient}}>{title}</Text>
                         <Icon props={rightIcon} disabled={disabled} forFlatList={forFlatList}/>
                     </View>
                 </LinearGradient>
@@ -136,7 +142,9 @@ export function Btn({
                 <Text style={textStyle({
                     leftIcon: leftIcon,
                     rightIcon: rightIcon,
-                    textColor: textColor
+                    textColor: textColor,
+                    disabled: disabled,
+                    textDisabledColor: textDisabledColor
                 }).default}>{title}</Text>
                 <Icon props={rightIcon} disabled={disabled} forFlatList={forFlatList}/>
             </LinearGradient>
@@ -181,7 +189,7 @@ const styles = ({
     },
     innerGradient: {
         //@ts-ignore
-        backgroundColor: (useColorScheme() == "dark") ? 'black' : 'white',
+        backgroundColor: 'white',
         display: 'flex',
         flex: 1,
         height: '100%',
@@ -197,11 +205,12 @@ const textStyle = ({
                        leftIcon,
                        rightIcon,
                        disabled,
+                       textDisabledColor,
                        textColor
-                   }: { leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string }, disabled?: boolean | undefined, textColor?: string | undefined }) => StyleSheet.create({
+                   }: { leftIcon?: { name: string, color: string }, rightIcon?: { name: string, color: string }, disabled?: boolean | undefined, textColor?: string | undefined, textDisabledColor?: string | undefined }) => StyleSheet.create({
     default: {
         fontSize: 16,
-        color: (textColor) ? textColor : 'white',
+        color: (disabled) ? (typeof textDisabledColor == "undefined") ? '#b3b3b3' : textDisabledColor : (textColor) ? textColor : 'white',
         fontFamily: 'TinderFont',
         marginBottom: 1.25,
         display: 'flex',
@@ -215,7 +224,7 @@ const textStyle = ({
     },
     gradient: {
         fontSize: 16,
-        color: (disabled) ? '#b3b3b3' : (textColor) ? textColor : '#FD3178',
+        color: (disabled) ? (typeof textDisabledColor == "undefined") ? '#b3b3b3' : textDisabledColor : (textColor) ? textColor : '#FD3178',
         fontFamily: 'TinderFont',
         marginBottom: 1.25,
         display: 'flex',

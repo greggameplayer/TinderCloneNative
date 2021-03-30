@@ -22,7 +22,7 @@ export default function Frame10({navigation}: {navigation: any})  {
             </View>
             <Text style={styles.textegris}>Ajouter au moins 2 photos pour continuer</Text>
             <View style={styles.buttonBottom}>
-                <CustomButton action={() => navigation.navigate('Frame11')} type={"plain"} colors={["#F5F5F5", "#F5F5F5"]} textColor={"#969494"} height={40} width={220} title={'CONTINUER'}   />
+                <CustomButton action={() => navigation.navigate('Frame11')} type={"plain"} height={40} width={220} title={'CONTINUER'}   />
             </View>
         </View>
     );
