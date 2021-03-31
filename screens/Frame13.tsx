@@ -17,7 +17,7 @@ export default function Frame13({navigation}: {navigation: any}) {
             flexWrap: "wrap", paddingTop: insets.top}}>
 
             <View style={styles.header}>
-                <Icon type="font-awesome-5" name="arrow-left" onPress={() => navigation.navigate('Frame12')}></Icon>
+                <Icon type="font-awesome-5" name="arrow-left" onPress={() => navigation.navigate('Frame12')}/>
                 <Text style={styles.text}>Réglages</Text>
             </View>
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Input } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 import CustomButton from "../components/CustomButton";
-import {CustomCodeInput} from "../TinderCloneNative/components/CustomCodeInput";
+import {CustomCodeInput} from "../components/CustomCodeInput";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useState} from "react";
 
