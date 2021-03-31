@@ -55,7 +55,7 @@ export default function Frame11({navigation}: {navigation: any}) {
 
             <View style={styles.header}>
                 <Icon type="font-awesome-5" name="fire" color="#FD3178"></Icon>
-                <Icon type="font-awesome-5" name="star" solid></Icon>
+                <Icon type="font-awesome-5" name="star" solid onPress={() => navigation.navigate('Frame21')}></Icon>
                 <Icon type="font-awesome-5" name="comment" solid onPress={() => navigation.navigate('Frame20')}></Icon>
                 <Icon type="font-awesome-5" name="user" solid onPress={() => navigation.navigate('Frame12')}></Icon>
             </View>

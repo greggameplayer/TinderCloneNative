@@ -13,7 +13,9 @@ import Frame10 from "./screens/Frame10";
 import Frame11 from "./screens/Frame11";
 import Frame12 from "./screens/Frame12";
 import Frame13 from "./screens/Frame13";
+import Frame14 from "./screens/Frame14";
 import Frame20 from "./screens/Frame20";
+import Frame21 from "./screens/Frame21";
 
 export type RootStackParamList = {
   Root: undefined;
@@ -40,7 +42,9 @@ export const SignUpScreens = {
   Frame11:Frame11,
   Frame12:Frame12,
   Frame13:Frame13,
+  Frame14:Frame14,
   Frame20:Frame20,
+  Frame21:Frame21,
   FrameRegistration : FrameRegistration,
 
 }

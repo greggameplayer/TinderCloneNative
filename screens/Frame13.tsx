@@ -17,7 +17,7 @@ export default function Frame13({navigation}: {navigation: any}) {
             flexWrap: "wrap", paddingTop: insets.top}}>
 
             <View style={styles.header}>
-                <Icon type="font-awesome-5" name="arrow-left" onPress={() => navigation.navigate('Frame11')}></Icon>
+                <Icon type="font-awesome-5" name="arrow-left" onPress={() => navigation.navigate('Frame12')}></Icon>
                 <Text style={styles.text}>Réglages</Text>
             </View>
 
@@ -65,19 +65,62 @@ export default function Frame13({navigation}: {navigation: any}) {
             </View >
 
             <View style={styles.container}>
-                <View style={styles.containerBis1}>
+                <View style={styles.containerBis2}>
                     <Text style={styles.texte6}>Langues préférés</Text>
+                    <Text style={styles.texte7}>anglais</Text>
+                    <Text style={styles.texte7}>français</Text>
+                    <Text style={styles.texte8}>Ajouter une langue...</Text>
+
                 </View>
             </View>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
-            <Text style={styles.texte3}>Réglage du compte</Text>
+
+            <View style={styles.container}>
+                <Text style={styles.texte4}>Utilisation des données</Text>
+                <View style={styles.containerBis1}>
+                    <Text style={styles.texte1}>Lecture automatique des vidéos</Text>
+                </View>
+                <View style={styles.containerBis2}>
+                    <Text style={styles.texte6}>Profil web</Text>
+                    <View style={styles.alignRow}>
+                        <Text style={styles.texte1}>Nom d'utilisateur</Text>
+                        <Text style={styles.texte1}>Demandez le votre</Text>
+                    </View>
+                </View>
+            </View >
+
+            <View style={styles.container}>
+                <Text style={styles.texte4}>Coup de coeur</Text>
+                <View style={styles.containerBis2}>
+                    <Text style={styles.texte6}>Gérer les Coups de Coeurs</Text>
+                    <Text style={styles.texte7}>Nom d'utilisateur</Text>
+                </View>
+            </View>
+
+
+            <View style={styles.container}>
+                <Text style={styles.texte4}>Accusé de reception</Text>
+                <View style={styles.containerBis2}>
+                    <Text style={styles.texte6}>Gérer les Accusés de réception</Text>
+                    <Text style={styles.texte7}>Réglages</Text>
+                </View>
+            </View>
+
+            <View style={styles.container}>
+                <Text style={styles.texte4}>Période Swipe Surge</Text>
+                <View style={styles.containerBis2}>
+                    <Text style={styles.texte6}>Gérer les période Swipe Surge</Text>
+                    <Text style={styles.texte7}>Réglages</Text>
+                </View>
+            </View>
+
+            <View style={styles.container}>
+                <Text style={styles.texte4}>Statut d'activité</Text>
+                <View style={styles.containerBis2}>
+                    <Text style={styles.texte6}>Statut d'activité récente</Text>
+                    <Text style={styles.texte7}>Réglages</Text>
+                </View>
+            </View>
+
 
 
 
@@ -168,8 +211,36 @@ const styles = StyleSheet.create({
     },
     texte6:{
         color:"#FD3178",
-        fontSize:16,
+        fontSize:15,
         fontWeight:"bold",
+    },
+    containerBis2:{
+        flexDirection:"column",
+        backgroundColor:"#FFFFFF",
+        marginLeft:10,
+        marginRight:10,
+        padding:15,
+        justifyContent:"center",
+        borderRadius:4,
+        marginBottom:5,
+        marginTop:5
+    },
+    texte7:{
+        color:"#909296",
+        fontSize:13,
+        marginTop:15,
+        fontWeight:"bold"
+    },
+    texte8:{
+        color:"#27B5FF",
+        fontSize:13,
+        marginTop:20,
+        fontWeight:"bold"
+    },
+    alignRow:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        marginTop:15
     }
 
 

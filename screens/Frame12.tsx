@@ -47,7 +47,7 @@ export default function Frame12({navigation}: {navigation: any}) {
                     <Icon type="font-awesome-5" name="camera"  color="#FD3178"></Icon>
                 </View>
                 <View style={styles.logo2}>
-                    <Icon type="font-awesome-5" name="shield-alt" color="#B3BEC4" ></Icon>
+                    <Icon type="font-awesome-5" name="shield-alt" color="#B3BEC4" onPress={() => navigation.navigate('Frame14')} ></Icon>
                 </View>
             </View>
 
@@ -74,7 +74,7 @@ export default function Frame12({navigation}: {navigation: any}) {
 
 
             <View style={styles.footer}>
-                <CustomButton action={() => navigation.navigate('Frame10')}  type={"outlined"} colors={["white", "white"]} width={200} height={40} textColor="#FD3178"
+                <CustomButton type={"outlined"} colors={["white", "white"]} width={200} height={40} textColor="#FD3178"
                                title={'MON TINDER PLUS'}  />
             </View>
         </View>

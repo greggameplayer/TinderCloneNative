@@ -8,6 +8,6 @@ export default function CustomToggle({activeChecked, setActiveChecked, disabled,
     };
 
     return (
-            <Switch value={activeChecked} onValueChange={onActiveCheckedChange} disabled={disabled} thumbColor={activeChecked ? '#FD3178' : 'grey'} trackColor={{false: 'lightgrey', true: '#ffcede'}} style={{margin: 10}}/>
+        <Switch value={activeChecked} onValueChange={onActiveCheckedChange} disabled={disabled} thumbColor={activeChecked ? '#FD3178' : 'grey'} trackColor={{false: 'lightgrey', true: '#ffcede'}} style={{margin: 10}}/>
     );
 }
