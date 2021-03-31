@@ -9,8 +9,8 @@ import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/na
 import {createStackNavigator} from "@react-navigation/stack";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import {SignUpScreens} from './types';
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import FrameTest from "./screens/FrameTest";
+import Frame0 from "./screens/Frame0";
+import {useFonts} from "expo-font";
 
 const Stack = createStackNavigator();
 
@@ -29,8 +29,11 @@ export function Home() {
 export default function App() {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
+    let [fontsLoaded] = useFonts({
+        'TinderFont': require('./assets/fonts/GothamRounded-Medium.otf'),
+    });
 
-    if (!isLoadingComplete) {
+    if (!isLoadingComplete && !fontsLoaded) {
         return null;
     } else {
         return (
@@ -42,14 +45,9 @@ export default function App() {
                             // Use the screens normally
                             ...SignUpScreens,
                         }).map(([name, component]) => (
-                            <Stack.Screen name={name} component={component} key={name}/>
+                            <Stack.Screen name={name} component={component} key={name} options={{headerShown: false}}/>
                         ))}
-                        <Stack.Screen name="WelcomeScreen" component={FrameTest} options={{
-                            headerShown: false,
-                            headerBackImage: () => (
-                                <FontAwesome5 name={'facebook'}/>
-                            )
-                        }}/>
+                        <Stack.Screen name="WelcomeScreen" component={Frame0} options={{headerShown: false}}/>
                         <Stack.Screen name="HomeScreen" component={Home} options={{headerShown: false}}/>
                     </Stack.Navigator>
                 </NavigationContainer>

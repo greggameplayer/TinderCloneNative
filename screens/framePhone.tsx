@@ -7,26 +7,31 @@ import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useState} from "react";
 
 
-export default function Frame4({navigation}: {navigation: any}) {
+export default function FramePhone({navigation}: {navigation: any}) {
+
 
     const insets = useSafeAreaInsets();
-    const [text, setText] = useState("");
+    const [phone, setPhone] = useState("");
+
     return (
         <View style={{ flex:1 , backgroundColor:"#FFFFFF",flexDirection: "column",
             flexWrap: "wrap", paddingTop: insets.top}}>
 
             <View style={styles.containerArrow}>
-                {/* @ts-ignore */}
+                {/*@ts-ignore*/}
                 <Icon name={'arrow-left'} onPress={() => navigation.navigate('Frame0')} type={"font-awesome-5"} color={"#c3c3c3"}/>
             </View>
             <View style={styles.containerNum}>
-                <Text style={styles.texte}>Mon prénom est</Text>
+                <Text style={styles.texte}>Mon numéro</Text>
             </View>
-            <Input placeholder={"Mon prénom est"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={"default"} onChangeText={setText}/>
-            <Text style={styles.textegris}>Voila comment ça apparaitra dans Tinder</Text>
+            <Input placeholder={"Numéro de téléphone est"} style={styles.container} containerStyle = {styles.campusInputContainer}  keyboardType={'numeric'} onChangeText={(text: any) => {
+                setPhone(text);
+            }}/>
+            <Text style={styles.textegris}>Nous vous enverrons un message avec un code de vérification. Des frais liés à l'envoi de messages et/ou d'utilisation de données peuvent s'appliquer</Text>
+            <Text style={styles.texte2}>Découvrez ce qui se passe si vous changez de numéro de téléphone.</Text>
 
-            <View style={styles.containerButton}>
-                <CustomButton action={() => navigation.navigate('Frame5')}  type={"plain"} title={'CONTINUER'} height={40} width={250} disabled={text == ""} disabledColor={["#F5F5F5", "#F5F5F5"]} textDisabledColor={"#969494"} />
+            <View style={styles.buttonBottom}>
+                <CustomButton action={() => navigation.navigate('Frame2')}  type={"plain"} title={'CONTINUER'} disabled={phone == ""} disabledColor={["#F5F5F5", "#F5F5F5"]} textDisabledColor={"#969494"}/>
             </View>
         </View>
     );
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         textAlign: 'center',
         flexDirection: "row",
+        flex: 0.1,
     },
     containerNum:{
         paddingTop: 10,
@@ -58,10 +64,12 @@ const styles = StyleSheet.create({
         color:"#FFFFFF"
     },
     textegris:{
-        paddingLeft:40,
-        paddingRight:40,
+        marginRight:35,
+        marginLeft:35,
         color:"#c3c3c3",
         fontSize:12,
+        alignSelf:"center"
+
     },
     texte:{
         color:"#000000",
@@ -99,15 +107,18 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     campusInputContainer: {
-       marginTop:"40%",
-        width:"100%",
-        paddingLeft:40,
-        paddingRight:40
+        marginLeft:25,
+        width:310,
+        alignSelf:"center"
     },
     containerButton: {
         flexDirection: "row",
         alignSelf: "center",
+        marginTop:50
+    },
+    buttonBottom:{
         position:"absolute",
-        bottom:15
-    }
+        bottom: 10,
+        alignSelf:"center",
+    },
 });

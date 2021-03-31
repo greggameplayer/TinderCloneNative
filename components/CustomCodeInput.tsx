@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
-import {SafeAreaView, StyleSheet} from "react-native";
+import {SafeAreaView, StyleSheet, View, Text} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import {Input} from 'react-native-elements';
-import {View, Text} from "./Themed";
 import {
     CodeField,
     Cursor,
@@ -30,7 +29,6 @@ export function CustomCodeInput({dataArg, setDataArg}: { dataArg: React.SetState
     });
 
     return (
-        <View>
             <CodeField
                 ref={ref}
                 {...props}
@@ -45,14 +43,13 @@ export function CustomCodeInput({dataArg, setDataArg}: { dataArg: React.SetState
                         // Make sure that you pass onLayout={getCellOnLayoutHandler(index)} prop to root component of "Cell"
                         onLayout={getCellOnLayoutHandler(index)}
                         key={index}
-                        style={[styles.cellRoot, isFocused && styles.focusCell]}>
+                        style={[styles.cellRoot, isFocused && styles.focusCell, {backgroundColor: "white"}]}>
                         <Text style={styles.cellText}>
                             {symbol || (isFocused ? <Cursor/> : null)}
                         </Text>
                     </View>
                 )}
             />
-        </View>
     );
 }
 
@@ -73,15 +70,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomColor: '#ccc',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        backgroundColor: "white"
     },
     cellText: {
         color: '#000',
         fontSize: 25,
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: "white"
     },
     focusCell: {
         borderBottomColor: '#007AFF',
         borderBottomWidth: 2,
+        backgroundColor: "white"
+
     },
 });
