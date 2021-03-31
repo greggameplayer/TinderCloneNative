@@ -14,15 +14,13 @@ import {useSafeAreaInsets} from "react-native-safe-area-context";
 export default function Frame20({navigation}: {navigation: any}) {
     const insets = useSafeAreaInsets();
 
-    // @ts-ignore
     return (
         <View style={{ flex:1 , backgroundColor:"#FFFFFF",flexDirection: "column",
             flexWrap: "wrap", paddingTop: insets.top}}>
 
             <View style={style.header}>
                 <View style={style.icon}>
-                    {/* @ts-ignore */}
-                    <Icon type="font-awesome-5" name="arrow-left" solid onPress={() => navigation.navigate('Frame11')}/>
+                    <Icon type="font-awesome-5" name="arrow-left" solid onPress={() => navigation.navigate('Frame11')}></Icon>
                 </View>
                 <View>
                     <Text  style={style.user}>LA MEUF DE LUCAS</Text>
@@ -41,57 +39,45 @@ export default function Frame20({navigation}: {navigation: any}) {
                 <ScrollView style={style.scrollView}>
                 <SafeAreaView >
                     <MessageBubble
-                        /* @ts-ignore */
                         mine
                         text="Salut !"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         text="Hola :)"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         mine
                         text="Chaud pour un plan ?"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         text="Oui bb"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         mine
                         text="T'es sérieux?"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         text="Oui"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         mine
                         text="Quand ?"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         text="Demain 10h dans les toilettes EPSI rue nationale"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         mine
                         text="T'es sérieux?"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         text="Oui"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         mine
                         text="Quand ?"
                     />
                     <MessageBubble
-                        /* @ts-ignore */
                         text="Demain 10h dans les toilettes EPSI rue nationale"
                     />
                 </SafeAreaView>
